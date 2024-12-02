@@ -5,8 +5,8 @@
 // @author       barraIhsan
 // @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
-// @updateURL    https://gist.github.com/barraIhsan/bc901bc9c3604749d48361d23a094d29/raw/ytPremiumLogoNoYoodle.user.js
-// @downloadURL  https://gist.github.com/barraIhsan/bc901bc9c3604749d48361d23a094d29/raw/ytPremiumLogoNoYoodle.user.js
+// @updateURL    https://github.com/kerem123216/hotdogi/raw/refs/heads/main/ytPremiumLogoNoYoodle.user.js
+// @downloadURL  https://github.com/kerem123216/hotdogi/raw/refs/heads/main/ytPremiumLogoNoYoodle.user.js
 // ==/UserScript==
 
 (function() {
