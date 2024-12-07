@@ -13,19 +13,29 @@
 (function() {
     'use strict';
 
+    let currentVideoId = null;
+
     // Video sayfasında olup olmadığını kontrol et
     if (window.location.href.includes("watch")) {
-        // URL'den video ID'sini al
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoId = urlParams.get('v');
-        
         // Her saniyede bir kontrol et
         setInterval(() => {
+            // URL'den video ID'sini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get('v');
+
+            // Eğer video ID'si değiştiyse, güncelle
+            if (videoId !== currentVideoId) {
+                currentVideoId = videoId;
+            }
+
             const downloadButton = document.querySelector('#flexible-item-buttons ytd-download-button-renderer');
             if (downloadButton) {
-                downloadButton.addEventListener('click', function() {
-                    // Yeni sekmede y2meta.tube'ye videoId ile yönlendir
-                    window.open(`https://y2meta.tube/convert/?videoId=${videoId}`, '_blank');
+                downloadButton.addEventListener('click', function(event) {
+                    // Varsayılan davranışı engelle ve sadece yönlendir
+                    event.preventDefault();
+                    if (currentVideoId) {
+                        window.open(`https://y2meta.tube/convert/?videoId=${currentVideoId}`, '_blank');
+                    }
                 });
             }
         }, 1000); // 1000ms = 1 saniye
