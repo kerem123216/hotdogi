@@ -9,9 +9,34 @@
 // @downloadURL  https://github.com/kerem123216/hotdogi/raw/refs/heads/main/ytPremiumLogoNoYoodle.user.js
 // ==/UserScript==
 
+
 (function() {
     'use strict';
-    
+
+    // Video sayfasında olup olmadığını kontrol et
+    if (window.location.href.includes("watch")) {
+        // URL'den video ID'sini al
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('v');
+        
+        // Her saniyede bir kontrol et
+        setInterval(() => {
+            const downloadButton = document.querySelector('#flexible-item-buttons ytd-download-button-renderer');
+            if (downloadButton) {
+                downloadButton.addEventListener('click', function() {
+                    // Yeni sekmede y2meta.tube'ye videoId ile yönlendir
+                    window.open(`https://y2meta.tube/convert/?videoId=${videoId}`, '_blank');
+                });
+            }
+        }, 1000); // 1000ms = 1 saniye
+    }
+})();
+
+
+
+(function() {
+    'use strict';
+
     // fix "TrustedError" on chrome[-ium], code snippet from zerodytrash/Simple-YouTube-Age-Restriction-Bypass@d2cbcc0
     if (window.trustedTypes && trustedTypes.createPolicy) {
         if (!trustedTypes.defaultPolicy) {
@@ -23,7 +48,7 @@
             });
         }
     }
-    
+
     // Add load event listener to only spawn MutationObserver when the web actually loaded
     window.addEventListener('load', () => {
         // Function to be called when the target element is found
